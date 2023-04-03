@@ -99,11 +99,11 @@
     "vite": "^3.1.8"
   },
   "scripts": {
-    "dev": "vite --port 7000",
+    "dev": "vite --port 7001",
     "develop": "npm run dev",
     "check": "tsc",
     "build": "vite build",
-    "preview": "vite preview --port 7000",
+    "preview": "vite preview --port 7001",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "start": "npm run dev",
     "serve": "npm run preview",

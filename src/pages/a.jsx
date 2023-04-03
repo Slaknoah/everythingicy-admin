@@ -20,6 +20,7 @@ import ProductsRoute from "../domain/products"
 import SalesChannels from "../domain/sales-channels"
 import Settings from "../domain/settings"
 import PublishableApiKeys from "../domain/publishable-api-keys"
+import IFrameLoader from "../components/molecules/iframe-loader"
 
 const IndexPage = () => {
   const navigate = useNavigate()
@@ -27,9 +28,11 @@ const IndexPage = () => {
   useHotkeys("g + p", () => navigate("/a/products"))
 
   return (
-    <PrivateRoute>
-      <DashboardRoutes />
-    </PrivateRoute>
+    <IFrameLoader>
+      <PrivateRoute>
+        <DashboardRoutes />
+      </PrivateRoute>
+    </IFrameLoader>
   )
 }
 
