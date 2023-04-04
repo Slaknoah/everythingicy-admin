@@ -63,6 +63,11 @@ const IFrameLoader = ({ children }: IFrameLoaderProps) => {
     }
 
     window.addEventListener("message", messageHandler)
+
+    // Timeout after 10 seconds
+    setTimeout(() => {
+      setIsLoadingAuth(false)
+    }, 10000)
   }, [])
 
   if (!isLoadingAuth) {
