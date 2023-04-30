@@ -1,7 +1,6 @@
+import { useAdminGetSession } from "medusa-react"
 import { Route, Routes } from "react-router-dom"
 import SettingsCard from "../../components/atoms/settings-card"
-import FeatureToggle from "../../components/fundamentals/feature-toggle"
-import ChannelsIcon from "../../components/fundamentals/icons/channels-icon"
 import CoinsIcon from "../../components/fundamentals/icons/coins-icon"
 import CrosshairIcon from "../../components/fundamentals/icons/crosshair-icon"
 import DollarSignIcon from "../../components/fundamentals/icons/dollar-sign-icon"
@@ -10,7 +9,7 @@ import MailIcon from "../../components/fundamentals/icons/mail-icon"
 import MapPinIcon from "../../components/fundamentals/icons/map-pin-icon"
 import TaxesIcon from "../../components/fundamentals/icons/taxes-icon"
 import TruckIcon from "../../components/fundamentals/icons/truck-icon"
-// import UsersIcon from "../../components/fundamentals/icons/users-icon"
+import UsersIcon from "../../components/fundamentals/icons/users-icon"
 import SettingsOverview from "../../components/templates/settings-overview"
 import CurrencySettings from "./currencies"
 import Details from "./details"
@@ -19,23 +18,47 @@ import Regions from "./regions"
 import ReturnReasons from "./return-reasons"
 import Taxes from "./taxes"
 import Users from "./users"
-import KeyIcon from "../../components/fundamentals/icons/key-icon"
+// import { useEffect, useState } from "react"
 
 const SettingsIndex = () => {
+  // const [isIframe, setIsIframe] = useState(false)
+  // useEffect(() => {
+  //   setIsIframe(window.parent != window)
+  // }, [])
+  const { user } = useAdminGetSession()
+
   return (
     <SettingsOverview>
-      <SettingsCard
-        heading={"Regions"}
-        description={"Manage the markets you will operate within"}
-        icon={<MapPinIcon />}
-        to={`/a/settings/regions`}
-      />
-      <SettingsCard
-        heading={"Currencies"}
-        description={"Manage the markets you will operate within"}
-        icon={<CoinsIcon />}
-        to={`/a/settings/currencies`}
-      />
+      {/* TODO: Hide regions and currencies for non admins */}
+      {user.role === "admin" && (
+        <>
+          <SettingsCard
+            heading={"Regions"}
+            description={"Manage the markets you will operate within"}
+            icon={<MapPinIcon />}
+            to={`/a/settings/regions`}
+          />
+          <SettingsCard
+            heading={"Currencies"}
+            description={"Manage the markets you will operate within"}
+            icon={<CoinsIcon />}
+            to={`/a/settings/currencies`}
+          />
+          <SettingsCard
+            heading={"Return Reasons"}
+            description={"Manage Order settings"}
+            icon={<DollarSignIcon />}
+            to={`/a/settings/return-reasons`}
+          />
+          <SettingsCard
+            heading={"Shipping"}
+            description={"Manage shipping profiles"}
+            icon={<TruckIcon />}
+            to={`/a/settings/shipping-profiles`}
+            disabled={true}
+          />
+        </>
+      )}
       <SettingsCard
         heading={"Store Details"}
         description={"Manage your business details"}
@@ -43,24 +66,11 @@ const SettingsIndex = () => {
         to={`/a/settings/details`}
       />
       <SettingsCard
-        heading={"Shipping"}
-        description={"Manage shipping profiles"}
-        icon={<TruckIcon />}
-        to={`/a/settings/shipping-profiles`}
-        disabled={true}
-      />
-      <SettingsCard
-        heading={"Return Reasons"}
-        description={"Manage Order settings"}
-        icon={<DollarSignIcon />}
-        to={`/a/settings/return-reasons`}
-      />
-      {/* <SettingsCard
         heading={"The Team"}
         description={"Manage users of your Medusa Store"}
         icon={<UsersIcon />}
         to={`/a/settings/team`}
-      /> */}
+      />
       <SettingsCard
         heading={"Personal Information"}
         description={"Manage your Medusa profile"}
